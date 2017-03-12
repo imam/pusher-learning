@@ -5,9 +5,7 @@ require 'htmlentities'
 require 'gon-sinatra'
 require 'json'
 require 'pusher'
-if ENV['ENV'] === 'development'
-	require 'dotenv/load'
-end
+require 'dotenv/load'
 
 Sinatra::register Gon::Sinatra
 

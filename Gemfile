@@ -5,4 +5,4 @@ gem 'mysql2'
 gem 'htmlentities'
 gem 'gon-sinatra'
 gem 'pusher'
-gem 'dotenv', groups: [:development, :test]
+gem 'dotenv'
