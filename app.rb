@@ -15,7 +15,7 @@ DB = Sequel.connect(ENV['DB'])
 class Status < Sequel::Model(:status)
 end
 
-Post.set_allowed_columns :status
+Status.set_allowed_columns :status
 
 pusher_client = Pusher::Client.new(
   app_id: ENV['PUSHER_ID'],
