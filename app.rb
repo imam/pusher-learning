@@ -6,6 +6,7 @@ require 'gon-sinatra'
 require 'json'
 require 'pusher'
 require 'dotenv/load'
+require 'pg'
 
 Sinatra::register Gon::Sinatra
 
