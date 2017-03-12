@@ -1,0 +1,67 @@
+<html>
+	<head>
+		<title>Pusher</title>
+		<link rel="stylesheet" href="https://unpkg.com/awsm.css/dist/awsm.min.css">
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.15.3/axios.min.js"></script>
+		<script src="https://unpkg.com/vue"></script>
+		<script src="https://js.pusher.com/4.0/pusher.min.js"></script>
+	</head>
+	<body>
+	<header>
+		<h1>Pusher Learning</h1>
+		<p>Just having fun trying to learn pusher :)</p>
+	</header>
+	<main>
+		<div class="search-box">
+			<textarea name="text" id="" v-model="create_status" style="width: 100%" rows="3"></textarea>
+			<button v-on:click="create">Submit</button>
+		</div>
+		<article v-for="s in status">
+			<h1>{{s.status}}</h1>
+			<a href="#" @click="delete_status(s.id,$event)">Hapus</a>
+		</article>
+	</main>
+	<%=  include_gon(namespace: 'data') %>
+	<script>
+		v = new Vue({
+			el: 'main',
+			data: {
+				status: data.status,
+				create_status: null
+			},
+			methods: {
+				create: function(){
+					axios.post('/',{
+						data:{
+							status: this.create_status
+						}
+					}).then(function(){
+						this.create_status = null;
+					}.bind(this));
+				},
+				delete_status: function(id,e){
+					e.preventDefault();
+					axios.delete('/',{
+						data:{
+							id: id
+						}
+					});
+				}
+			}
+		})
+		// Enable pusher logging - don't include this in production
+	    Pusher.logToConsole = true;
+
+	    var pusher = new Pusher('1e76483610875d355082', {
+	      cluster: 'ap1',
+	      encrypted: true
+	    });
+
+	    var status_channel = pusher.subscribe('status');
+	    status_channel.bind('status-update', function(data){
+	    	console.log(data);
+	    	v.status = data.status;
+	    });
+	</script>
+	</body>
+</html>
