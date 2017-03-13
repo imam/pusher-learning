@@ -7,7 +7,8 @@ Just me having fun learning Pusher.com :computer:
 https://pusher-learning.herokuapp.com/
 
 ## Tech Stack
-- Ruby (Sinatra)
+- Ruby (Sinatra, Sequel)
+- MySQL
 - Pusher.com (duh)
 - Vue.js
 - Heroku
